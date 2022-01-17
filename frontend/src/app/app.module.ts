@@ -8,11 +8,12 @@ import { EventComponent } from './event/event.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { EventListComponent } from './event-list/event-list.component';
-
+import {MatIconModule} from '@angular/material/icon';
 
 const materialComponents = [
   MatCardModule,
-  MatButtonModule
+  MatButtonModule,
+  MatIconModule
 
 ]
 @NgModule({

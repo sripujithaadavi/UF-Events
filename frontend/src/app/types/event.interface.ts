@@ -9,7 +9,8 @@ export type Event = {
     category: string,
     address: string,
     imageUrl: string,
-    eventon: string
+    eventon: string,
+    upvoted?: boolean
 }
 
 export type EventResp = {
