@@ -1,0 +1,8 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    app-event {
+        padding: 10px;
+    }
+}

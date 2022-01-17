@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EventComponent } from './event/event.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import { EventListComponent } from './event-list/event-list.component';
 
 
 const materialComponents = [
@@ -17,7 +18,8 @@ const materialComponents = [
 @NgModule({
   declarations: [
     AppComponent,
-    EventComponent
+    EventComponent,
+    EventListComponent
   ],
   imports: [
     BrowserModule,
