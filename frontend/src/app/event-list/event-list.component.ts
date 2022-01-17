@@ -20,6 +20,7 @@ export class EventListComponent implements OnInit {
     address: "RitzUnion, 2nd floor 217",
     imageUrl: "string",
     eventon: "1/12/2022, 1:30:08 PM",
+    upvoted: true
   }
   EventResponse: EventResp = {
     events: [

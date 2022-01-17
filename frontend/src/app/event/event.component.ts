@@ -14,4 +14,12 @@ export class EventComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  voting(upvote) {
+    if(upvote) {
+        this.event.upvoted = true;
+    } else {
+      this.event.upvoted = false;
+    }
+  }
+
 }
