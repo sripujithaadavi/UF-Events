@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
-	"github.com/gofiber/fiber"
-	"gorm.io/driver/sqlite"
+	"github.com/gofiber/fiber/v2"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -15,11 +14,20 @@ type DBInstance struct {
 
 var Database DBInstance
 
+func DBPostSave(c *fiber.Ctx) error {
+	event := new(Events)
+	if err := c.BodyParser(event); err != nil {
+		return c.Status(400).SendString(err.Error())
+	}
+	Database.Db.Create(&event)
+	return c.JSON(&event)
+}
 func main() {
 	DBConc()
 	app := fiber.New()
-	//app.Post("/postEvent", postEve)
-	log.Fatal(app.Listen(":3000"))
+	app.Post("/postevent", DBPostSave)
+
+	app.Listen(":3000")
 
 }
 
@@ -39,11 +47,11 @@ type Events struct {
 }
 
 func DBConc() {
-	db, err := gorm.Open(sqlite.Open("event.db"), &gorm.Config{})
+	dbURL := "postgres://postgres:password@localhost:5432/events"
+	db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
 
 	if err != nil {
-		fmt.Println(err.Error())
-		panic("noooo")
+		log.Fatalln(err)
 	}
 
 	db.AutoMigrate(&Events{})
