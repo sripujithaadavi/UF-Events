@@ -21,4 +21,4 @@ Front End - Angular
 
 Back End - Go
 
-Database - MONGODB
+Database - PostgreSQL
