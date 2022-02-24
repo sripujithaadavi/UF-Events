@@ -1,0 +1,46 @@
+<div class="event_form_container">
+    <div [formGroup]="eventDetails" class="event_form_container__flex">
+        <h1>Create your Event here.</h1>
+        <mat-form-field appearance="legacy" class="event_form_container__flex__input">
+            <mat-label>Event Name</mat-label>
+            <input matInput placeholder="Gator Night Meetup" formControlName="header">
+            <mat-hint>Enter the event Name</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="legacy" class="event_form_container__flex__input">
+            <mat-label>Event Recurrence</mat-label>
+            <input matInput placeholder="Weekly" formControlName="secheader">
+            <mat-hint>Enter weekly, monthly or yearly</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="legacy" class="event_form_container__flex__input">
+            <mat-label>Description</mat-label>
+            <input matInput placeholder=" Ready for the Gator Night? Let's join together this Friday@8:00PM to celebrate this night with many cultural events, movies, food, board games and more. Registration starts on Monday" formControlName="desc">
+            <mat-hint>Please provide description</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="legacy" class="event_form_container__flex__input">
+            <mat-label>Sample Description</mat-label>
+            <input matInput placeholder="A late night program conducted every week that offers free movies, arts, games, cultural events, DJ, food and more" formControlName="sampledesc">
+        </mat-form-field>
+        <mat-form-field appearance="legacy" class="event_form_container__flex__input">
+            <mat-label>Price</mat-label>
+            <input matInput placeholder="0" formControlName="price">
+            <mat-hint>Provide the event ticket price</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="legacy" class="event_form_container__flex__input">
+            <mat-label>Category</mat-label>
+            <input matInput placeholder="In-person Event" formControlName="category">
+        </mat-form-field>
+        <mat-form-field appearance="legacy" class="event_form_container__flex__input">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="" formControlName="address">
+            <mat-hint>Please provide address of the Event</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="legacy" class="event_form_container__flex__input">
+            <mat-label>EventOn</mat-label>
+            <input matInput placeholder="Reitz Union" formControlName="eventon">
+            <mat-hint>Enter the name of the building where the event is conducted</mat-hint>
+        </mat-form-field>
+        <button mat-raised-button color="accent" (click)="postEvent()" [disabled]="eventDetails.invalid">Publish
+            Event</button>
+
+    </div>
+</div>
