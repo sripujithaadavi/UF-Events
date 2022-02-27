@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventsService } from '../events.service';
 import { EventResp, Event } from '../types/event.interface';
 
 @Component({
@@ -23,20 +24,18 @@ export class EventListComponent implements OnInit {
     upvoted: true
   }
   EventResponse: EventResp = {
-    events: [
-      {...this.mock},
-      {...this.mock},
-      {...this.mock},
-      {...this.mock},
-      {...this.mock},
-      {...this.mock},
-      {...this.mock},
-      {...this.mock},
-    ]
+    events: []
   }
-  constructor() { }
+  constructor(private eventsService: EventsService) { }
 
   ngOnInit(): void {
+    this.fetchEvents();
+  }
+
+  fetchEvents() {
+    this.eventsService.getEvent().subscribe((res: any[]) => {
+      this.EventResponse.events = [...res] 
+    });
   }
 
 }

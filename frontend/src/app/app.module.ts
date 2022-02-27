@@ -13,6 +13,7 @@ import { FormComponent } from './form/form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 const materialComponents = [
   MatCardModule,
   MatButtonModule,
@@ -34,7 +35,8 @@ const materialComponents = [
     BrowserAnimationsModule,
     ...materialComponents,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [
     ...materialComponents
