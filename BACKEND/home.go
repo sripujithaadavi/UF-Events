@@ -8,10 +8,9 @@ import (
 
 	"github.com/dgrijalva/jwt-go/v4"
 	"github.com/gofiber/fiber/v2"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-
-	"golang.org/x/crypto/bcrypt"
 )
 
 type DBInstance struct {
