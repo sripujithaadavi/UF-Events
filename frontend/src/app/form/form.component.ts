@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { EventsService } from '../events.service';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -17,12 +19,13 @@ export class FormComponent implements OnInit {
     address: new FormControl("", [Validators.required]),
     eventon: new FormControl("", [Validators.required])
   });
-  constructor() { }
+  constructor(private eventsService: EventsService, private router: Router) { }
   ngOnInit(): void {
   }
   postEvent() {
-    console.log(this.eventDetails.value);
-
+    this.eventsService.postEvent(this.eventDetails.value).subscribe(res => {
+      this.router.navigate(['/']);
+    })
   }
 
 }

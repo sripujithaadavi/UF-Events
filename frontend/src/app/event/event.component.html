@@ -19,7 +19,7 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-icon-button *ngIf="!event.upvoted" (click)="voting(true)">
+    <button mat-icon-button color="primary" *ngIf="!event.upvoted" (click)="voting(true)">
       <mat-icon>favorite</mat-icon>
     </button>
     <button mat-icon-button color="warn" *ngIf="event.upvoted" (click)="voting(false)">

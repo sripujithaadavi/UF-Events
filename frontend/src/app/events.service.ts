@@ -11,4 +11,8 @@ export class EventsService {
   getEvent() {
     return this.http.get(this.base+"getevents");
   }
+
+  postEvent(data) {
+  return this.http.post(this.base+"postevent", data)
+  }
 }
