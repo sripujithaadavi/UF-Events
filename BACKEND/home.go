@@ -27,10 +27,17 @@ func DBPostSave(c *fiber.Ctx) error {
 	Database.Db.Create(&event)
 	return c.JSON(&event)
 }
+
+func DBGetEvents(c *fiber.Ctx) error {
+	var events []Events
+	Database.Db.Find((&events))
+	return c.JSON(&events)
+}
 func main() {
 	DBConc()
 	app := fiber.New()
 	app.Post("/postevent", DBPostSave)
+	app.Get("/getevents", DBGetEvents)
 
 	app.Listen(":3000")
 
