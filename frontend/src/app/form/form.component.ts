@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
   }
   postEvent() {
-    this.eventsService.postEvent(this.eventDetails.value).subscribe(res => {
+    this.eventsService.postEvent({...this.eventDetails.value, price: +this.eventDetails.value.price}).subscribe(res => {
       this.router.navigate(['/']);
     })
   }
