@@ -8,6 +8,7 @@ import (
 
 	"github.com/dgrijalva/jwt-go/v4"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -36,6 +37,7 @@ func DBGetEvents(c *fiber.Ctx) error {
 func main() {
 	DBConc()
 	app := fiber.New()
+	app.Use(cors.New())
 	app.Post("/postevent", DBPostSave)
 	app.Get("/getevents", DBGetEvents)
 
