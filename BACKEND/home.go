@@ -40,7 +40,10 @@ func main() {
 	app.Use(cors.New())
 	app.Post("/postevent", DBPostSave)
 	app.Get("/getevents", DBGetEvents)
+	app.Post("/signup", Register)
 
+	app.Post("/login", Login)
+	app.Post("/logout", Logout)
 	app.Listen(":3000")
 
 }
