@@ -119,7 +119,9 @@ Status Codes: 200, 400, 401
 
 ## 5.	Logout
 ## Endpoint
+```http
 /logout
+```
 ## Method
 Post
 ## URL
