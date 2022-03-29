@@ -2,11 +2,15 @@
 # UF Events - Sprint 1
 Web Application to know about the events conducted at the University of Florida.
 ## Group Members
-Sri Pujitha Adavi - 1133 1222
+Frontend -
 
-Nagarjuna Reddy Boya - 7433 5009
+1. Sri Pujitha Adavi - 1133 1222
 
-Tejdeep Bandreddy - 7206 9922
+2. Nagarjuna Reddy Boya - 7433 5009
+
+Backend -
+
+3. Tejdeep Bandreddy - 7206 9922
 ## Demo Links
 Frontend Demo - https://www.youtube.com/watch?v=D67U3VY7VEw
 
