@@ -1,0 +1,27 @@
+.login-container {
+    // background-image: url("");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    padding-top: 200px;
+    height: 100vh;
+    &__form {
+        background-color: white;
+        padding: 50px;
+        width: 400px;
+        height: 350px;
+        display: flex;
+        flex-direction: column;
+        button {
+            width: 50px;
+            margin: auto;
+        }
+        h1 {
+            padding-bottom: 20px;
+            font-size: x-large;
+            font-weight: 900;
+        }
+    }
+}
