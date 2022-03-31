@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"strconv"
@@ -73,6 +74,64 @@ type Users struct {
 	Name     string
 	Email    string
 	Password []byte `json:"-"`
+}
+
+type Likes struct {
+	UserID  string `json:"userId"`
+	EventID string `json:"eventID"`
+	Liked   bool   `json:"liked"`
+}
+
+func contains(s []string, str string) int {
+	for idx, v := range s {
+		if v == str {
+			return idx
+		}
+	}
+	return -1
+}
+func RemoveUserID(s []string, index int) []string {
+	return append(s[:index], s[index+1:]...)
+}
+func Like(c *fiber.Ctx) error {
+	// liked := new(Likes)
+	// if err := c.BodyParser(liked); err != nil {
+	//  return c.Status(400).JSON(err.Error())
+	// }
+	var event Events
+	var likes Likes
+	if err := c.BodyParser(likes); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+	eventId := likes.EventID
+	liked := likes.Liked
+	result := Database.Db.Where("eventid = ?", eventId).First(&event)
+	if result != nil && result.RowsAffected == 1 {
+		if liked {
+			if contains(event.LikesList, likes.UserID) == -1 {
+				event.LikesList = append(event.LikesList, likes.UserID)
+				event.Likes = event.Likes + 1
+				Database.Db.Save(&event)
+				return c.Status(200).JSON("likes updated")
+			} else {
+				fmt.Println("idx true")
+				return c.Status(400).JSON("You already liked this event")
+			}
+		} else {
+			idx := contains(event.LikesList, likes.UserID)
+			if idx != -1 {
+				event.Likes = event.Likes - 1
+				event.LikesList = RemoveUserID(event.LikesList, idx)
+				Database.Db.Save(&event)
+				return c.Status(200).JSON("likes updated")
+			} else {
+				fmt.Println("idx false")
+				return c.Status(400).JSON("You cannot unlike this event")
+			}
+		}
+	} else {
+		return c.Status(400).JSON("unable to edit likes")
+	}
 }
 
 const KeySecret = "secret"
