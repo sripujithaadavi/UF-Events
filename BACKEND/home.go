@@ -69,7 +69,7 @@ type Events struct {
 }
 
 type Users struct {
-	Id       uint
+	UserId   int `gorm:"primary_key" json:"userId"`
 	Name     string
 	Email    string
 	Password []byte `json:"-"`
@@ -107,7 +107,7 @@ func Login(c *fiber.Ctx) error {
 
 	var user Users
 	Database.Db.Where("email= ?", data["email"]).First(&user)
-	if user.Id == 0 {
+	if user.UserId == 0 {
 		c.Status(fiber.StatusNotFound)
 		return c.JSON(fiber.Map{
 			"message": "user not found",
@@ -121,7 +121,7 @@ func Login(c *fiber.Ctx) error {
 	}
 
 	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
-		Issuer: strconv.Itoa(int(user.Id)),
+		Issuer: strconv.Itoa(int(user.UserId)),
 	})
 
 	token, err := claims.SignedString([]byte(KeySecret))
