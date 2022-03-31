@@ -9,6 +9,7 @@ import (
 	"github.com/dgrijalva/jwt-go/v4"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/lib/pq"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -49,18 +50,22 @@ func main() {
 }
 
 type Events struct {
-	Header     string `json:"header"`
-	SecHeader  string `json:"secheader"`
-	Desc       string `json:"desc"`
-	SampleDesc string `json:"sampledesc"`
-	PostedBy   string `json:"postedby"`
-	PostedOn   string `json:"postedon"`
-	Price      int32  `json:"price"`
-	Category   string `json:"category"`
-	Address    string `json:"address"`
-	ImageUrl   string `json:"imageurl"`
-	EventOn    string `json:"eventon"`
-	Upvoted    bool   `json:"upvoted"`
+	gorm.Model
+	EventId    int            `gorm:"primary_key" json:"eventid"`
+	Header     string         `json:"header"`
+	SecHeader  string         `json:"secheader"`
+	Desc       string         `json:"desc"`
+	SampleDesc string         `json:"sampledesc"`
+	PostedBy   string         `json:"postedby"`
+	PostedOn   string         `json:"postedon"`
+	Price      int32          `json:"price"`
+	Category   string         `json:"category"`
+	Address    string         `json:"address"`
+	ImageUrl   string         `json:"imageurl"`
+	EventOn    string         `json:"eventon"`
+	Upvoted    bool           `json:"upvoted"`
+	Likes      int            `json:"likes"`
+	LikesList  pq.StringArray `gorm:"type:text[]"`
 }
 
 type Users struct {
