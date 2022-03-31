@@ -43,7 +43,7 @@ func main() {
 	app.Post("/postevent", DBPostSave)
 	app.Get("/getevents", DBGetEvents)
 	app.Post("/signup", Register)
-
+	app.Post("/like", Like)
 	app.Post("/login", Login)
 	app.Post("/logout", Logout)
 	app.Listen(":3000")
