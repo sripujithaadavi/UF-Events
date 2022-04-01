@@ -1,0 +1,31 @@
+.details_container {
+    width: 350px;
+    margin: auto;
+    margin-top: 100px;
+    &__header {
+        text-align: center;
+        padding-bottom: 20px;
+        font-weight: 900;
+        font-size: 32px;
+    }
+
+    &__secondary {
+        text-align: center;
+        padding-bottom: 50px;
+        font-weight: 600;
+        font-size: 24px;
+    }
+
+    &__datesTitle {
+        display: inline;
+        padding: 10px;
+        font-weight: 900;
+    }
+    &__dateValue {
+        display: inline;
+        padding: 10px;
+    }
+    &__regular {
+        padding-bottom: 20px;
+    }
+}

@@ -41,9 +41,7 @@ export class EventListComponent implements OnInit {
 
 
   navigatetoDetail(event) {
-    console.log('sdkgnkapr dsgakwrea gdpWNzjsfdol');
-    
-    this.router.navigate(['/event/'+event.category])
+    this.router.navigate(['/event/'+event.ID])
   }
 
 }
