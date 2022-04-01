@@ -1,1 +1,48 @@
-<p>event-detail works!</p>
+<div class="details_container" *ngIf="event">
+    <div class="details_container__header">
+        {{event.header}}
+    </div>
+    <div class="details_container__secondary">
+        {{event.secheader}}
+    </div>
+    <div>
+        <div class="details_container__datesTitle">
+            Event On
+        </div>
+        <div class="details_container__dateValue">
+            {{ event.eventon | date }}
+        </div>
+    </div>
+    <div class="details_container__regular">
+        <div class="details_container__datesTitle">
+            Created On
+        </div>
+        <div class="details_container__dateValue">
+            {{ event.CreatedAt | date }}
+        </div>
+    </div>
+
+    <div class="details_container__regular">
+        Price: {{event.price | currency}}
+    </div>
+
+    <div class="details_container__regular">
+        Event Type {{event.category}}
+    </div>
+
+    <div class="details_container__regular">
+        Address: {{event.address}}
+    </div>
+    
+    <div class="details_container__regular">
+        No of Likes: {{event.LikesList?.length}}
+    </div>
+
+    <div class="details_container__regular">
+        simple description: {{event.sampledesc}}
+    </div>
+
+    <div class="details_container__regular">
+        Description: {{event.desc}}
+    </div>
+</div>

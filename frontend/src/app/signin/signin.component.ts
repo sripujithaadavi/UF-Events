@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -28,7 +27,7 @@ export class SigninComponent implements OnInit {
   login() {
     this.eventsService.signInUser(this.loginForm.value).subscribe((res: any) => {
       this.eventsService.setCookies(res.token);
-      this.router.navigate(['/products']);
+      this.router.navigate(['/events']);
   });
   }
 }
