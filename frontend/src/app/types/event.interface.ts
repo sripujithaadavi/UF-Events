@@ -10,7 +10,10 @@ export type Event = {
     address: string,
     imageUrl: string,
     eventon: string,
-    upvoted?: boolean
+    upvoted?: boolean,
+    ID?: number,
+    CreatedAt?: string,
+    LikesList?: any,
 }
 
 export type EventResp = {

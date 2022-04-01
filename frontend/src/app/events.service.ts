@@ -13,12 +13,16 @@ export class EventsService {
     return this.http.get(this.base+"getevents");
   }
 
+  getEventByID(id: string) {
+    return this.http.get(this.base+"getevent/"+id);
+  }
+
   postEvent(data) {
   return this.http.post(this.base+"postevent", data)
   }
 
   signUpUser(userData) {
-    return this.http.post(this.base+'register', userData);
+    return this.http.post(this.base+'signup', userData);
   }
   signInUser(userData) {
     return this.http.post(this.base+'login', userData);
