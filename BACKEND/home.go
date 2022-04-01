@@ -95,6 +95,7 @@ type Events struct {
 }
 
 type Users struct {
+	gorm.Model
 	UserId   int `gorm:"primary_key" json:"userId"`
 	Name     string
 	Email    string
