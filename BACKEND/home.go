@@ -46,7 +46,32 @@ func main() {
 	app.Post("/like", Like)
 	app.Post("/login", Login)
 	app.Post("/logout", Logout)
+	app.Get("/getevent/:id", GetEvent)
 	app.Listen(":3000")
+
+}
+
+func GetEvent(c *fiber.Ctx) error {
+
+	id, err := c.ParamsInt("id")
+
+	if err != nil {
+
+		return c.Status(400).JSON("error")
+
+	}
+
+	var event Events
+
+	Database.Db.Find(&event, id)
+
+	if event.ID == 0 {
+
+		return c.Status(400).JSON("error")
+
+	}
+
+	return c.JSON(&event)
 
 }
 
