@@ -12,10 +12,10 @@ describe('test signup function', () => {
     cy.get('.mat-form-field.ng-tns-c86-3 > .mat-form-field-wrapper > .mat-form-field-flex').should('have.text','lastname *')
   })
   it('Fill the deatails to create an account', () => {
-    cy.get('#mat-input-0').type('sripujitha@gmail.com')
-    cy.get('#mat-input-1').type('sripujitha')
-    cy.get('#mat-input-2').type('Sri Pujitha')
-    cy.get('#mat-input-3').type('Adavi')
+    cy.get('#mat-input-0').type('nagarjunareddyboya@gmail.com')
+    cy.get('#mat-input-1').type('nagarjuna')
+    cy.get('#mat-input-2').type('Nagarjuna Reddy')
+    cy.get('#mat-input-3').type('Boya')
 
 })
 })
@@ -94,8 +94,27 @@ describe('test event display function', () => {
       cy.contains('Celebrate Mass on Ash Wednesday in Campus')
       cy.contains('Plaza of the Americas')
     })  
+})
 
-   it('Fill the second event details, post and check if it is getting posted', () => {
+describe('test create function', () => {
+      beforeEach(() => {
+        cy.visit(' http://localhost:4200/create')
+        cy.wait(4000)
+      })
+
+    it('Check if text is present', () => {
+        cy.contains('Create your Event here.')
+ 
+        cy.get('h1').should('have.text', 'Create your Event here.')
+        cy.get('#mat-hint-0').should('have.text','Enter the event Name')
+        cy.get('#mat-hint-1').should('have.text','Provide secondary details')
+        cy.get('#mat-hint-2').should('have.text','Please provide description')
+        cy.get('#mat-hint-3').should('have.text','Provide the event ticket price')
+        cy.get('#mat-hint-4').should('have.text','Please provide address of the Event')
+        cy.get('#mat-hint-5').should('have.text','Enter the name of the building where the event is conducted')
+    })
+
+    it('Fill the second event details, post and check if it is getting posted', () => {
     cy.wait(2000)
     cy.get('#mat-input-0').type('Shaving Cream Showdown')
     cy.wait(2000)
@@ -114,16 +133,57 @@ describe('test event display function', () => {
     cy.get('#mat-input-7').type('2022-10-03T16:00')
     cy.wait(2000)
     cy.get('.mat-button-wrapper').click()
-    cy.contains('Shaving Cream Showdown')
-    cy.contains('Yearly')
-    cy.contains('10')
-    cy.contains('The purpose of this event is to build housing community')
-    cy.contains('Weaver Hall')
+    cy.wait(1000)
+    cy.get('h1').should('have.text','Login Form')
+    cy.get('.mat-form-field.ng-tns-c86-8 > .mat-form-field-wrapper > .mat-form-field-flex').should('have.text','Email')
+    cy.get('.mat-form-field.ng-tns-c86-9 > .mat-form-field-wrapper > .mat-form-field-flex').should('have.text','Password *')
+    cy.get('#mat-input-8').type('nagarjunareddyboya@gmail.com')
+    cy.get('#mat-input-9').type('nagarjuna')
+    cy.wait(2000)
+    })
+})
+
+describe('test event display function', () => {
+      beforeEach(() => {
+        cy.visit(' http://localhost:4200/events')
+        cy.wait(4000)
+      })
+      it('check if it is getting posted', () => {
+      cy.wait(2000)
+      cy.contains('Shaving Cream Showdown')
+      cy.contains('Yearly')
+      cy.contains('10')
+      cy.contains('The purpose of this event is to build housing community')
+      cy.contains('Weaver Hall')
+      cy.get(':nth-child(2) > .mat-card').click()
+      cy.contains('Shaving Cream Showdown')
+      cy.contains('Yearly')
+      cy.contains('In-person')
+      cy.contains('10')
+      cy.contains('The purpose of this event is to build housing community')
+      cy.contains('Weaver Hall')
   })
+})
 
+describe('test create function', () => {
+    beforeEach(() => {
+      cy.visit(' http://localhost:4200/create')
+      cy.wait(4000)
+    })
+    it('Check if text is present', () => {
+      cy.contains('Create your Event here.')
 
-  it('Fill the third event details, post and check if it is getting posted', () => {
-  cy.wait(2000)
+      cy.get('h1').should('have.text', 'Create your Event here.')
+      cy.get('#mat-hint-0').should('have.text','Enter the event Name')
+      cy.get('#mat-hint-1').should('have.text','Provide secondary details')
+      cy.get('#mat-hint-2').should('have.text','Please provide description')
+      cy.get('#mat-hint-3').should('have.text','Provide the event ticket price')
+      cy.get('#mat-hint-4').should('have.text','Please provide address of the Event')
+      cy.get('#mat-hint-5').should('have.text','Enter the name of the building where the event is conducted')
+    })
+
+    it('Fill the third event details, post and check if it is getting posted', () => {
+    cy.wait(2000)
   cy.get('#mat-input-0').type('Tide Slide')
   cy.wait(2000)
   cy.get('#mat-input-1').type('Monthly')
@@ -142,11 +202,57 @@ describe('test event display function', () => {
   cy.wait(2000)
   cy.get('.mat-button-wrapper').click()
   cy.wait(1000)
+  cy.get('h1').should('have.text','Login Form')
+    cy.get('.mat-form-field.ng-tns-c86-8 > .mat-form-field-wrapper > .mat-form-field-flex').should('have.text','Email')
+    cy.get('.mat-form-field.ng-tns-c86-9 > .mat-form-field-wrapper > .mat-form-field-flex').should('have.text','Password *')
+    cy.get('#mat-input-8').type('nagarjunareddyboya@gmail.com')
+    cy.get('#mat-input-9').type('nagarjuna')
+  cy.wait(2000)
+  })
+})
+
+describe('test event display function', () => {
+    beforeEach(() => {
+      cy.visit(' http://localhost:4200/events')
+      cy.wait(4000)
+    })
+
+    it('check if it is getting posted', () => {
+  cy.wait(1000)
   cy.contains('Tide Slide')
   cy.contains('Monthly')
   cy.contains('0')
   cy.contains('This event is to raise money for Dance Marathon')
   cy.contains('Fraternity House')
+  cy.get(':nth-child(3) > .mat-card').click()
+  cy.wait(1000)
+  cy.contains('Tide Slide')
+  cy.contains('Monthly')
+  cy.contains('In-person')
+  cy.contains('0')
+  cy.contains('This event is to raise money for Dance Marathon')
+  cy.contains('Fraternity House')
+
+  })
+})
+
+describe('test create function', () => {
+  beforeEach(() => {
+    cy.visit(' http://localhost:4200/create')
+    cy.wait(4000)
+  })
+ 
+  it('Check if text is present', () => {
+      cy.contains('Create your Event here.')
+
+      cy.get('h1').should('have.text', 'Create your Event here.')
+      cy.get('#mat-hint-0').should('have.text','Enter the event Name')
+      cy.get('#mat-hint-1').should('have.text','Provide secondary details')
+      cy.get('#mat-hint-2').should('have.text','Please provide description')
+      cy.get('#mat-hint-3').should('have.text','Provide the event ticket price')
+      cy.get('#mat-hint-4').should('have.text','Please provide address of the Event')
+      cy.get('#mat-hint-5').should('have.text','Enter the name of the building where the event is conducted')
+     
   })
 
 
@@ -170,10 +276,35 @@ describe('test event display function', () => {
   cy.wait(2000)
   cy.get('.mat-button-wrapper').click()
   cy.wait(1000)
+  cy.get('h1').should('have.text','Login Form')
+    cy.get('.mat-form-field.ng-tns-c86-8 > .mat-form-field-wrapper > .mat-form-field-flex').should('have.text','Email')
+    cy.get('.mat-form-field.ng-tns-c86-9 > .mat-form-field-wrapper > .mat-form-field-flex').should('have.text','Password *')
+    cy.get('#mat-input-8').type('nagarjunareddyboya@gmail.com')
+    cy.get('#mat-input-9').type('nagarjuna')
+  cy.wait(2000)
+  })
+})
+
+describe('test event display function', () => {
+  beforeEach(() => {
+    cy.visit(' http://localhost:4200/events')
+    cy.wait(4000)
+  })
+  it('check if it is getting posted', () => {
+  cy.wait(2000)
   cy.contains('Southeast Sisterhood Conference')
   cy.contains('Yearly')
   cy.contains('15')
   cy.contains('A celebration for our Southeast regional chapters.')
   cy.contains('Reitz Union')
-  }) 
+  cy.get(':nth-child(4) > .mat-card').click()
+  cy.contains('Southeast Sisterhood Conference')
+  cy.contains('Yearly')
+  cy.contains('In-person')
+  cy.contains('15')
+  cy.contains('A celebration for our Southeast regional chapters.')
+  cy.contains('Reitz Union')
+
+  })
+ 
 })
