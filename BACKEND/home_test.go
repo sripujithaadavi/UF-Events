@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bytes"
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
@@ -145,4 +147,115 @@ func TestDBGetEvents(t *testing.T) {
 		assert.Equalf(t, test.expectedCode, resp.StatusCode, test.description)
 
 	}
+}
+
+func TestLoginWhenInCorrectPasswordIsGiven(t *testing.T) {
+	var data = []byte(`{
+		"email": "tejd@gmail.com",
+		"password": "12"
+	}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("POST", "/login", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("Wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusNotFound, response.StatusCode)
+}
+
+func TestLoginWhenCorrectPassWordISGiven(t *testing.T) {
+	var data = []byte(`{
+		"email": "tejd@gmail.com",
+		"password": "password"
+	}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("POST", "/login", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("Wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusOK, response.StatusCode)
+}
+
+func TestRegisterSuccessfulRegistration(t *testing.T) {
+	var data = []byte(`{
+		"name" : "tejdeep"
+		"email": "tejd@gmail.com",
+		"password": "password"
+	}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("POST", "/signup", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("Handler Returned a wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusOK, response.StatusCode)
+}
+
+func TestRegisterRegistrationFail(t *testing.T) {
+	var data = []byte(`{
+		"name" : "Tejdeep"
+		"email": "tejd@gmail.com",
+		"password": "password"
+	}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("POST", "/signup", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("Wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusInternalServerError, response.StatusCode)
+}
+
+func TestLogoutFailurelogout(t *testing.T) {
+	var data = []byte(`{}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("POST", "/Logout", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("Wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusInternalServerError, response.StatusCode)
+}
+
+func TestLogoutSuccessfulLogout(t *testing.T) {
+	var data = []byte(`{}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("POST", "/Logout", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("Wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusOK, response.StatusCode)
+}
 }
