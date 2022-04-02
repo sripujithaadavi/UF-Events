@@ -52,15 +52,48 @@ Step 4 - After signingin with your credentials, you can see the your events post
 ## Frontend Output
 ![Register](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/Register.png)
 
+
 ![CreateEventForm](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/CreateEventForm.png)
+
 
 ![Signin](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/Signin.png)
 
+
 ![EventsDisplay](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/EventsDisplay.png)
+
 
 ![EventDescription](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/EventDescription.png)
 
+
 ## Testcases Output
-Implemented testcases for all 4 pages : register, create, signin, events, 
+Implemented testcases for all 4 pages : register, create, signin, events.
+
 
 ![Testcases](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/Testcases.png)
+
+## Start the backend server
+Step 1. Go to the backend directory
+
+Step 2. Run the below Command
+```http
+$go run home.go
+```
+
+## Sprint 3 Backend Accomplishments
+1.	Created an API endpoint /like to get the total number of likes of an event.
+
+2.	User will be able to like an event from the list of available events.
+
+3.	User will be able to remove like for an already liked event.
+
+4.	Created an API endpoint getevent/:id.
+
+5.	User will be able to retrieve the event by using the event ID.
+
+6.	Unit tested the functionality of the functions Login, Logout, Register.
+
+## Backend Output
+![GetEventById](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/GetEventById.png)
+
+
+![LIKE](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/LIKE.png)
