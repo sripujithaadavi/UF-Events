@@ -1,4 +1,24 @@
 /// <reference types="cypress" />
+describe('test signup function', () => {
+  beforeEach(() => {
+    cy.visit(' http://localhost:4200/register')
+    cy.wait(4000)    
+  })
+  it('Check if text is present', () => {
+    cy.get('h1').contains('SignUp Form')
+    cy.get('.mat-form-field.ng-tns-c86-0 > .mat-form-field-wrapper > .mat-form-field-flex').should('have.text','Email')
+    cy.get('.mat-form-field.ng-tns-c86-1 > .mat-form-field-wrapper > .mat-form-field-flex').should('have.text','Password *')
+    cy.get('.mat-form-field.ng-tns-c86-2 > .mat-form-field-wrapper > .mat-form-field-flex').should('have.text','firstname *')
+    cy.get('.mat-form-field.ng-tns-c86-3 > .mat-form-field-wrapper > .mat-form-field-flex').should('have.text','lastname *')
+  })
+  it('Fill the deatails to create an account', () => {
+    cy.get('#mat-input-0').type('sripujitha@gmail.com')
+    cy.get('#mat-input-1').type('sripujitha')
+    cy.get('#mat-input-2').type('Sri Pujitha')
+    cy.get('#mat-input-3').type('Adavi')
+
+})
+})
 
 describe('test create function', () => {
   beforeEach(() => {
