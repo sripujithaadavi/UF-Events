@@ -50,18 +50,17 @@ Step 4 - After signingin with your credentials, you can see the your events post
 
 8. We implemented authentication using JWT tokenization.
 ## Frontend Output
-![Register]()
+![Register](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/Register.png)
 
-![Signin]()
+![CreateEventForm](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/CreateEventForm.png)
 
-![EventsDisplay]()
+![Signin](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/Signin.png)
 
-![EventDescription]()
+![EventsDisplay](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/EventsDisplay.png)
 
-![CreateEventForm]()
-
+![EventDescription](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/EventDescription.png)
 
 ## Testcases Output
 Implemented testcases for all 4 pages : register, create, signin, events, 
 
-![Testcases]()
+![Testcases](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint3%20output/Testcases.png)
