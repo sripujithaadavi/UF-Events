@@ -59,15 +59,38 @@ describe('test create function', () => {
     cy.wait(2000)
     cy.get('.mat-button-wrapper').click()
     cy.wait(1000)
-    cy.contains('Mass on the Grass')
-    cy.contains('Weekly')
-    cy.contains('4')
-    cy.contains('Celebrate Mass on Ash Wednesday in Campus')
-    cy.contains('Plaza of the Americas')
-  })  
+    cy.get('h1').should('have.text','Login Form')
+    cy.get('.mat-form-field.ng-tns-c86-8 > .mat-form-field-wrapper > .mat-form-field-flex').should('have.text','Email')
+    cy.get('.mat-form-field.ng-tns-c86-9 > .mat-form-field-wrapper > .mat-form-field-flex').should('have.text','Password *')
+    cy.get('#mat-input-8').type('nagarjunareddyboya@gmail.com')
+    cy.get('#mat-input-9').type('nagarjuna')
+    cy.wait(2000)
+  })
+})
 
+describe('test event display function', () => {
+    beforeEach(() => {
+      cy.visit(' http://localhost:4200/events')
+      cy.wait(4000)
+    })
 
-  it('Fill the second event details, post and check if it is getting posted', () => {
+    it('check if it is getting posted', () => {
+      cy.wait(4000)
+      cy.contains('Mass on the Grass')
+      cy.contains('Weekly')
+      cy.contains('4')
+      cy.contains('Celebrate Mass on Ash Wednesday in Campus')
+      cy.contains('Plaza of the Americas')
+      cy.get(':nth-child(1) > .mat-card').click()
+      cy.contains('Mass on the Grass')
+      cy.contains('Weekly')
+      cy.contains('In-person')
+      cy.contains('4')
+      cy.contains('Celebrate Mass on Ash Wednesday in Campus')
+      cy.contains('Plaza of the Americas')
+    })  
+
+   it('Fill the second event details, post and check if it is getting posted', () => {
     cy.wait(2000)
     cy.get('#mat-input-0').type('Shaving Cream Showdown')
     cy.wait(2000)
