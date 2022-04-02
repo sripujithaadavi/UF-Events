@@ -36,7 +36,12 @@ describe('test create function', () => {
       cy.get('#mat-hint-3').should('have.text','Provide the event ticket price')
       cy.get('#mat-hint-4').should('have.text','Please provide address of the Event')
       cy.get('#mat-hint-5').should('have.text','Enter the name of the building where the event is conducted')
-      
+      cy.get('.mat-form-field.ng-tns-c86-0 > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','Event Name *')
+      cy.get('.mat-form-field.ng-tns-c86-1 > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','Event Info *')
+      cy.get('.mat-form-field.ng-tns-c86-2 > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','Description *')
+      cy.get('.mat-form-field.ng-tns-c86-3 > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','Sample Description *')
+      cy.get('.mat-form-field.ng-tns-c86-5 > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','Category *')
+
   })
 
   it('Fill the first event details, post and check if it is getting posted', () => {
