@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,9 @@ import { Injectable } from '@angular/core';
 export class EventsService {
   base = "http://127.0.01:3000/"
   userData: any;
+  filterMenuToggled = new BehaviorSubject(false);
+  filtersApplied = false;
+  applyFilters = new BehaviorSubject({});
   constructor(private http: HttpClient) { }
 
   getEvent() {
@@ -27,9 +31,9 @@ export class EventsService {
   signInUser(userData) {
     return this.http.post(this.base+'login', userData);
   }
-  setCookies(token) {
+  setCookies(name, token, time=24*60*60*1000) {
     let d = new Date();
-    d.setTime(d.getTime()+(24*60*60*1000));
+    d.setTime(d.getTime()+(time));
     let expires = "; expires="+d.toUTCString();
     document.cookie = "token="+token+expires+"; path=/"
   }
@@ -50,6 +54,4 @@ export class EventsService {
   setUserData(userData) {
     this.userData = JSON.parse(JSON.stringify(userData));
   }
-
-
 }
