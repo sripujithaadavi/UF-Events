@@ -258,4 +258,3 @@ func TestLogoutSuccessfulLogout(t *testing.T) {
 
 	assert.Equal(t, fiber.StatusOK, response.StatusCode)
 }
-}
