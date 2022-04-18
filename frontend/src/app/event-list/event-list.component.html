@@ -1,3 +1,4 @@
+<app-filter [hidden]="!showFilter"></app-filter>
 <div class="container">
     <app-event *ngFor="let event of EventResponse.events" [event]="event" (click)="navigatetoDetail(event)"></app-event>
 </div>
