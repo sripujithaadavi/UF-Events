@@ -36,7 +36,7 @@
         </mat-form-field>
         <mat-form-field appearance="legacy" class="event_form_container__flex__input">
             <mat-label>EventOn</mat-label>
-            <input matInput placeholder="Reitz Union" formControlName="eventon" type="datetime-local">
+            <input matInput formControlName="eventon" type="datetime-local">
             <mat-hint>Enter the name of the building where the event is conducted</mat-hint>
         </mat-form-field>
         <button mat-raised-button color="accent" (click)="postEvent()" [disabled]="eventDetails.invalid">Publish
