@@ -39,7 +39,9 @@ func DBGetEvents(c *fiber.Ctx) error {
 func main() {
 	DBConc()
 	app := fiber.New()
-	app.Use(cors.New())
+	app.Use(cors.New(cors.Config{
+		AllowCredentials: true,
+	}))
 	app.Post("/postevent", DBPostSave)
 	app.Get("/getevents", DBGetEvents)
 	app.Post("/signup", Register)
@@ -57,7 +59,7 @@ func GetEvent(c *fiber.Ctx) error {
 
 	if err != nil {
 
-		return c.Status(400).JSON("error")
+		return c.Status(400).JSON("eor")
 
 	}
 
@@ -192,7 +194,7 @@ func Login(c *fiber.Ctx) error {
 
 	var user Users
 	Database.Db.Where("email= ?", data["email"]).First(&user)
-	if user.UserId == 0 {
+	if user.ID == 0 {
 		c.Status(fiber.StatusNotFound)
 		return c.JSON(fiber.Map{
 			"message": "user not found",
@@ -228,6 +230,7 @@ func Login(c *fiber.Ctx) error {
 	c.Cookie(&cookie)
 	return c.JSON(fiber.Map{
 		"message": "success",
+		"token":   token,
 	})
 
 }
