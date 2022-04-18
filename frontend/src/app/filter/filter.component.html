@@ -1,0 +1,55 @@
+<div [formGroup]="filterForm">
+    <h1>Filter Events</h1>
+    <div class="filter-form">
+        <div class="filter-form__item">
+            <mat-form-field appearance="legacy" class="ad_form_container__flex__input">
+                <mat-label>name</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+        </div>
+        <div class="filter-form__item">
+            <mat-form-field appearance="legacy" class="ad_form_container__flex__input">
+                <mat-label>Event Before</mat-label>
+                <input matInput formControlName="eventBefore" type="datetime-local">
+            </mat-form-field>
+        </div>
+        <div class="filter-form__item">
+            <mat-form-field appearance="legacy" class="ad_form_container__flex__input">
+                <mat-label>Event After</mat-label>
+                <input matInput formControlName="eventAfter" type="datetime-local">
+            </mat-form-field>
+        </div>
+        <div class="filter-form__item">
+            <mat-form-field appearance="legacy" class="ad_form_container__flex__input">
+                <mat-label>priceStart</mat-label>
+                <input matInput placeholder="0" formControlName="priceStart">
+            </mat-form-field>
+        </div>
+        <div class="filter-form__item">
+            <mat-form-field appearance="legacy" class="ad_form_container__flex__input">
+                <mat-label>priceEnd</mat-label>
+                <input matInput placeholder="1000" formControlName="priceEnd">
+            </mat-form-field>
+        </div>
+        <div class="filter-form__item">
+            <mat-form-field appearance="legacy" class="ad_form_container__flex__input">
+                <mat-label>SortBy</mat-label>
+                <mat-select formControlName="sortBy">
+                    <mat-option *ngFor="let option of sortBy" [value]="option">
+                      {{option}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="filter-form__item">
+            <mat-form-field appearance="legacy" class="ad_form_container__flex__input">
+                <mat-label>category</mat-label>
+                <input matInput placeholder="In-person" formControlName="category">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="filter-actions">
+        <button mat-raised-button color="accent" (click)="applyFilters()">Apply Filters</button>
+        <button mat-raised-button color="warn" (click)="clearFilters()">Clear Filters</button>
+    </div>
+</div>
