@@ -17,12 +17,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { SigninComponent } from './signin/signin.component';
 import { RegisterComponent } from './register/register.component';
+import { HeaderComponent } from './header/header.component';
+import { FilterComponent } from './filter/filter.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 const materialComponents = [
   MatCardModule,
   MatButtonModule,
   MatIconModule,
   MatInputModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatMenuModule,
+  MatSelectModule
 
 ]
 @NgModule({
@@ -33,7 +39,9 @@ const materialComponents = [
     FormComponent,
     EventDetailComponent,
     SigninComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeaderComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
