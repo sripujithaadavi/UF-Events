@@ -26,7 +26,7 @@ export class SigninComponent implements OnInit {
   }
   login() {
     this.eventsService.signInUser(this.loginForm.value).subscribe((res: any) => {
-      this.eventsService.setCookies(res.token);
+      this.eventsService.setCookies('token', res.token);
       this.router.navigate(['/events']);
   });
   }
