@@ -13,8 +13,7 @@ export class RegisterComponent implements OnInit {
   signUpForm: FormGroup = new FormGroup({
     email: new FormControl("", [Validators.email]),
     password: new FormControl("", [Validators.required]),
-    firstname: new FormControl("", [Validators.required]),
-    lastname: new FormControl("", [Validators.required]),
+    name: new FormControl("", [Validators.required])
   });
   constructor(private eventsService: EventsService, private router: Router) { }
   ngOnInit(): void {
