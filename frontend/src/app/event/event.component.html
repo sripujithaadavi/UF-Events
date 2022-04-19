@@ -1,9 +1,9 @@
-<mat-card class="event-card">
+<mat-card class="event-card" >
   <mat-card-header>
     <mat-card-title> {{ event.header }} </mat-card-title>
     <mat-card-subtitle> {{event.secheader}} </mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content>
+  <mat-card-content (click)="navigatetoDetail(event)">
       <p> Event@: {{ event.eventon | date: 'medium' }} </p>
     <div class="event-card__data">
       <div class="event-card__data__category">
@@ -19,10 +19,10 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-icon-button color="primary" *ngIf="!event.upvoted" (click)="voting(true)">
+    <button mat-icon-button color="black" *ngIf="!upvoted" (click)="voting(true)">
       <mat-icon>favorite</mat-icon>
     </button>
-    <button mat-icon-button color="warn" *ngIf="event.upvoted" (click)="voting(false)">
+    <button mat-icon-button color="warn" *ngIf="upvoted" (click)="voting(false)">
       <mat-icon>favorite</mat-icon>
     </button>
   </mat-card-actions>
