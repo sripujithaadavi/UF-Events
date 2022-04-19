@@ -7,10 +7,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class EventsService {
   base = "http://127.0.01:3000/"
-  userData: any;
+  userData = new BehaviorSubject({});
   filterMenuToggled = new BehaviorSubject(false);
   filtersApplied = false;
   applyFilters = new BehaviorSubject({});
+  events = new BehaviorSubject([]);
+  filteredEvents = new BehaviorSubject([]);
   constructor(private http: HttpClient) { }
 
   getEvent() {
@@ -45,13 +47,11 @@ export class EventsService {
     return ''
   }
 
+  like(data) {
+    return this.http.post(this.base+'like', data);
+  }
+
   validateCookie(token) {
     return this.http.post(this.base+'validate', token)
-  }
-  getUserData() {
-    return this.userData;
-  }
-  setUserData(userData) {
-    this.userData = JSON.parse(JSON.stringify(userData));
   }
 }
