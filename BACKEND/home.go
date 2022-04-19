@@ -105,9 +105,9 @@ type Users struct {
 }
 
 type Likes struct {
-	UserID  string `json:"userId"`
-	EventID string `json:"eventID"`
-	Liked   bool   `json:"liked"`
+	UserID  int  `json:"userId"`
+	EventID int  `json:"eventID"`
+	Liked   bool `json:"liked"`
 }
 
 func contains(s []string, str string) int {
@@ -136,8 +136,8 @@ func Like(c *fiber.Ctx) error {
 	result := Database.Db.Where("eventid = ?", eventId).First(&event)
 	if result != nil && result.RowsAffected == 1 {
 		if liked {
-			if contains(event.LikesList, likes.UserID) == -1 {
-				event.LikesList = append(event.LikesList, likes.UserID)
+			if contains(event.LikesList, strconv.Itoa(likes.UserID)) == -1 {
+				event.LikesList = append(event.LikesList, strconv.Itoa(likes.UserID))
 				event.Likes = event.Likes + 1
 				Database.Db.Save(&event)
 				return c.Status(200).JSON("likes updated")
@@ -146,7 +146,7 @@ func Like(c *fiber.Ctx) error {
 				return c.Status(400).JSON("You already liked this event")
 			}
 		} else {
-			idx := contains(event.LikesList, likes.UserID)
+			idx := contains(event.LikesList, strconv.Itoa(likes.UserID))
 			if idx != -1 {
 				event.Likes = event.Likes - 1
 				event.LikesList = RemoveUserID(event.LikesList, idx)
