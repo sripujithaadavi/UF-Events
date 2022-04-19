@@ -13,8 +13,9 @@ export class HeaderComponent implements OnInit {
   userDetails: any;
   showFilter = false;
   ngOnInit(): void {
-    this.userDetails = this.eventsService.getUserData();
-    console.log(this.userDetails);
+    this.eventsService.userData.subscribe(res => {
+      this.userDetails = res;
+    })
   }
   navigateTo(url) {
     this.router.navigate(['/'+url]);
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.eventsService.setCookies('token', '', 0);
     this.eventsService.setCookies('userInfo', '', 0);
+    this.eventsService.userData.next({});
     this.router.navigate(['/']);
   }
 

@@ -1,4 +1,4 @@
-<div class="header_container">
+<div class="header_container" *ngIf="userDetails.Name">
     <div class="group1" (click)="navigateTo('events')">
         UF-Events
     </div>
@@ -10,7 +10,7 @@
 <mat-menu #menu="matMenu">
     <button mat-menu-item>
         <mat-icon color="primary">face</mat-icon>
-        <span>UserName</span>
+        <span>{{ userDetails.Name }}</span>
     </button>
     <button mat-menu-item (click)="navigateTo('create')">
         <mat-icon color="primary">create</mat-icon>
