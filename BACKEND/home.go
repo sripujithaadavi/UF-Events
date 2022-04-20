@@ -47,10 +47,23 @@ func main() {
 	app.Post("/login", Login)
 	app.Post("/logout", Logout)
 	app.Get("/getevent/:id", GetEvent)
-	app.Get("/updatevent", UpdateEvent)
+	app.Put("/updatevent/:id", UpdateEvent)
+	app.Delete("/event/:id", DeleteEvent)
 	app.Listen(":3000")
 }
-
+func DeleteEvent(c *fiber.Ctx) error {
+	id, err := c.ParamsInt("id")
+	if err != nil {
+		return c.Status(400).JSON("eor")
+	}
+	var event Events
+	Database.Db.First(&event, id)
+	if event.ID == 0 {
+		return c.Status(400).JSON("no such event exists")
+	}
+	Database.Db.Delete(&event)
+	return c.JSON("event deleted")
+}
 func UpdateEvent(c *fiber.Ctx) error {
 	id, err := c.ParamsInt("id")
 	if err != nil {
