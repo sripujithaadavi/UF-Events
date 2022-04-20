@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-
 	"strconv"
 	"time"
 
@@ -30,7 +29,6 @@ func DBPostSave(c *fiber.Ctx) error {
 	Database.Db.Create(&event)
 	return c.JSON(&event)
 }
-
 func DBGetEvents(c *fiber.Ctx) error {
 	var events []Events
 	Database.Db.Find((&events))
@@ -50,31 +48,18 @@ func main() {
 	app.Post("/logout", Logout)
 	app.Get("/getevent/:id", GetEvent)
 	app.Listen(":3000")
-
 }
-
 func GetEvent(c *fiber.Ctx) error {
-
 	id, err := c.ParamsInt("id")
-
 	if err != nil {
-
 		return c.Status(400).JSON("eor")
-
 	}
-
 	var event Events
-
 	Database.Db.Find(&event, id)
-
 	if event.ID == 0 {
-
 		return c.Status(400).JSON("error")
-
 	}
-
 	return c.JSON(&event)
-
 }
 
 type Events struct {
@@ -95,7 +80,6 @@ type Events struct {
 	Likes      int            `json:"likes"`
 	LikesList  pq.StringArray `gorm:"type:text[]"`
 }
-
 type Users struct {
 	gorm.Model
 	UserId   int `gorm:"primary_key" json:"userId"`
@@ -103,7 +87,6 @@ type Users struct {
 	Email    string
 	Password []byte `json:"-"`
 }
-
 type Likes struct {
 	UserID  int  `json:"userId"`
 	EventID int  `json:"eventID"`
@@ -112,7 +95,9 @@ type Likes struct {
 
 func contains(s []string, str string) int {
 	for idx, v := range s {
+		println(v)
 		if v == str {
+			println("entered")
 			return idx
 		}
 	}
@@ -126,14 +111,16 @@ func Like(c *fiber.Ctx) error {
 	// if err := c.BodyParser(liked); err != nil {
 	//  return c.Status(400).JSON(err.Error())
 	// }
-	var event Events
+	event := new(Events)
 	var likes Likes
-	if err := c.BodyParser(likes); err != nil {
+	if err := c.BodyParser(&likes); err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
+	println("234")
+	println(likes.UserID)
 	eventId := likes.EventID
 	liked := likes.Liked
-	result := Database.Db.Where("eventid = ?", eventId).First(&event)
+	result := Database.Db.Where("id = ?", eventId).First(&event)
 	if result != nil && result.RowsAffected == 1 {
 		if liked {
 			if contains(event.LikesList, strconv.Itoa(likes.UserID)) == -1 {
@@ -167,7 +154,6 @@ const KeySecret = "secret"
 func Register(c *fiber.Ctx) error {
 	var data map[string]string
 	err := c.BodyParser(&data)
-
 	if err != nil {
 		return err
 	}
@@ -177,21 +163,15 @@ func Register(c *fiber.Ctx) error {
 		Email:    data["email"],
 		Password: password,
 	}
-
 	Database.Db.Create(&user)
-
 	return c.JSON(user)
-
 }
-
 func Login(c *fiber.Ctx) error {
 	var data map[string]string
 	err := c.BodyParser(&data)
-
 	if err != nil {
 		return err
 	}
-
 	var user Users
 	Database.Db.Where("email= ?", data["email"]).First(&user)
 	if user.ID == 0 {
@@ -206,57 +186,45 @@ func Login(c *fiber.Ctx) error {
 			"message": "incorrect password",
 		})
 	}
-
 	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
 		Issuer: strconv.Itoa(int(user.UserId)),
 	})
-
 	token, err := claims.SignedString([]byte(KeySecret))
-
 	if err != nil {
 		c.Status(fiber.StatusInternalServerError)
 		return c.JSON(fiber.Map{
 			"message": "user could not login",
 		})
 	}
-
 	cookie := fiber.Cookie{
 		Name:     "cook",
 		Value:    token,
 		Expires:  time.Now().Add(time.Hour * 24),
 		HTTPOnly: true,
 	}
-
 	c.Cookie(&cookie)
 	return c.JSON(fiber.Map{
 		"message": "success",
 		"token":   token,
 		"user":    user,
 	})
-
 }
 func User(c *fiber.Ctx) error {
 	cookie := c.Cookies("cook")
-
 	token, err := jwt.ParseWithClaims(cookie, &jwt.StandardClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return []byte(KeySecret), nil
-
 	})
-
 	if err != nil {
 		c.Status(fiber.StatusUnauthorized)
 		return c.JSON(fiber.Map{
 			"message": "User unauthenticated",
 		})
 	}
-
 	claims := token.Claims.(*jwt.StandardClaims)
-
 	var user Users
 	Database.Db.Where("id=?", claims.Issuer).First(&user)
 	return c.JSON(user)
 }
-
 func Logout(c *fiber.Ctx) error {
 	cookie := fiber.Cookie{
 		Name:     "cook",
@@ -264,22 +232,17 @@ func Logout(c *fiber.Ctx) error {
 		Expires:  time.Now().Add(-time.Hour),
 		HTTPOnly: true,
 	}
-
 	c.Cookie(&cookie)
-
 	return c.JSON(fiber.Map{
 		"message": "success ",
 	})
 }
-
 func DBConc() {
 	dbURL := "postgres://postgres:password@localhost:5432/events"
 	db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
-
 	if err != nil {
 		log.Fatalln(err)
 	}
-
 	db.AutoMigrate(&Events{})
 	Database = DBInstance{
 		Db: db,
