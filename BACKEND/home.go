@@ -48,7 +48,7 @@ func main() {
 	app.Post("/logout", Logout)
 	app.Get("/getevent/:id", GetEvent)
 	app.Put("/updatevent/:id", UpdateEvent)
-	app.Delete("/event/:id", DeleteEvent)
+	app.Delete("/deleteevent/:id", DeleteEvent)
 	app.Listen(":3000")
 }
 func DeleteEvent(c *fiber.Ctx) error {
