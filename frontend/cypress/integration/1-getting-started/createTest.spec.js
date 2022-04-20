@@ -284,5 +284,22 @@ describe('test signup function', () => {
     cy.contains('A celebration for our Southeast regional chapters.')
     cy.contains('Reitz Union')
 
+
+// cypress testcases to check the format of the event filters
+    cy.get('h1').should('have.text','Filter Events')
+    cy.get('.group1').should('have.text',' UF-Events ')
+    cy.get(':nth-child(1) > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','name')
+    cy.get(':nth-child(2) > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','Event Before')
+    cy.get(':nth-child(3) > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','Event After')
+    cy.get(':nth-child(4) > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','priceStart')
+    cy.get(':nth-child(5) > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','priceEnd')
+    cy.get(':nth-child(6) > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','SortBy')
+    cy.get(':nth-child(7) > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','category')
+
+// cypress testcases to logout from the account
+    cy.get('.mat-menu-trigger').click()
+    cy.get('.mat-menu-content > :nth-child(3)').click()
+
+
   })
 })
