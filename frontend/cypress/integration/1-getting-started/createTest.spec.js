@@ -296,9 +296,29 @@ describe('test signup function', () => {
     cy.get(':nth-child(6) > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','SortBy')
     cy.get(':nth-child(7) > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').should('have.text','category')
 
+// cypress test cases to check the event filter using name
+    cy.get('#mat-input-37').type('Mass on the Grass')
+    cy.get('.mat-accent > .mat-button-wrapper').click()
+    cy.wait(2000)
+    cy.get('.mat-warn > .mat-button-wrapper').click()
+
+// cypress test cases to check the event filter using Event Before
+    cy.get('#mat-input-38').type('2022-04-25T12:00')
+    cy.get('.mat-accent > .mat-button-wrapper').click()
+    cy.wait(2000)
+    cy.get('.mat-warn > .mat-button-wrapper').click()
+
+// cypress test cases to check the event filter using Event After
+    cy.get('#mat-input-39').type('2022-05-01T13:00')
+    cy.get('.mat-accent > .mat-button-wrapper').click()
+    cy.wait(2000)
+    cy.get('.mat-warn > .mat-button-wrapper').click()
+
 // cypress testcases to logout from the account
     cy.get('.mat-menu-trigger').click()
     cy.get('.mat-menu-content > :nth-child(3)').click()
+
+
 
 
   })
