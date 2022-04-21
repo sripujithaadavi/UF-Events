@@ -3,156 +3,117 @@ package main
 import (
 	"bytes"
 	"net/http"
-	"net/http/httptest"
+
+	//"net/http/httptest"
 	"testing"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestDBPostSave(t *testing.T) {
-	tests := []struct {
-		description string // description of the test case
-
-		route string // route path to test
-
-		expectedCode int // expected HTTP status code
-
-	}{
-
-		// Postive Scenario
-		{
-			description: "get HTTP status 200",
-
-			route: "/postevent",
-
-			expectedCode: 200,
-		},
-
-		// Negative Scenario
-		{
-			description: "get HTTP status 404, when route is not exists",
-
-			route: "/",
-
-			expectedCode: 404,
-		},
-	}
-
-	// Define Fiber app.
-	app := fiber.New()
-
-	//product := new(models.Product)
-
-	// Create route with GET method for test
-
-	app.Get("/postevent", func(c *fiber.Ctx) error {
-
-		// Return simple string as response
-
-		return c.SendStatus(200)
-
-	})
-
-	// Iterate through test single test cases
-
-	for _, test := range tests {
-
-		// Create a new http request with the route from the test case
-
-		req := httptest.NewRequest("GET", test.route, nil)
-
-		// Perform the request plain with the app,
-
-		// the second argument is a request latency
-
-		// (set to -1 for no latency)
-
-		resp, _ := app.Test(req, 1)
-
-		// Verify, if the status code is as expected
-
-		assert.Equalf(t, test.expectedCode, resp.StatusCode, test.description)
-
-	}
-}
-
-func TestDBGetEvents(t *testing.T) {
-	tests := []struct {
-		description string // description of the test case
-
-		route string // route path to test
-
-		expectedCode int // expected HTTP status code
-
-	}{
-
-		// First test case
-
-		{
-
-			description: "get HTTP status 200",
-
-			route: "/getevents",
-
-			expectedCode: 200,
-		},
-
-		// Second test case
-
-		{
-
-			description: "get HTTP status 404, when route is not exists",
-
-			route: "/",
-
-			expectedCode: 404,
-		},
-	}
-
-	// Define Fiber app.
+func TestPostEventSuccess(t *testing.T) {
+	var data = []byte(`{
+		
+			"header": "Play the fest",
+			"secheader": "Come play with us",
+			"desc": "Playstation and PC Games",
+			"sampledesc": "Exciting Prizes",
+			"postedby": "user1",
+			"postedon": "1/12/2022, 2:40:10 PM",
+			"price": 10000,
+			"category": "gaming",
+			"address": "ReitzUnion, 2nd floor 217",
+			"imageUrl": "string",
+			"eventon": "1/12/2022, 1:30:08 PM",
+			"upvoted": true
+		
+		
+	}`)
 
 	app := fiber.New()
 
-	//product := new(models.Product)
+	req, _ := http.NewRequest("POST", "/postevent", bytes.NewBuffer(data))
 
-	// Create route with GET method for test
+	response, err := app.Test(req)
 
-	app.Get("/getevents", func(c *fiber.Ctx) error {
-
-		// Return simple string as response
-
-		return c.SendStatus(200)
-
-	})
-
-	// Iterate through test single test cases
-
-	for _, test := range tests {
-
-		// Create a new http request with the route from the test case
-
-		req := httptest.NewRequest("GET", test.route, nil)
-
-		// Perform the request plain with the app,
-
-		// the second argument is a request latency
-
-		// (set to -1 for no latency)
-
-		resp, _ := app.Test(req, 1)
-
-		// Verify, if the status code is as expected
-
-		assert.Equalf(t, test.expectedCode, resp.StatusCode, test.description)
-
+	if err != nil {
+		t.Errorf("Wrong status code")
 	}
+
+	assert.Equal(t, fiber.StatusOK, response.StatusCode)
+
 }
 
+func TestPostEventFailure(t *testing.T) {
+	var data = []byte(`{
+		
+			"header": "Play the fest",
+			"secheader": "Come play with us",
+			"desc": "Playstation and PC Games",
+			"sampledesc": "Exciting Prizes",
+			"postedby": "user1",
+			"postedon": "1/12/2022, 2:40:10 PM",
+			"price": 10000,
+			"category": "gaming",
+			"address": "ReitzUnion, 2nd floor 217",
+			"imageUrl": "string",
+			"eventon": "1/12/2022, 1:30:08 PM",
+			"upvoted": true,
+		
+		
+	}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("POST", "/postevent", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("Wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusNotFound, response.StatusCode)
+
+}
+
+func TestGetEventsSuccess(t *testing.T) {
+	var data = []byte(`{}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("GET", "/getevents", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("Wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusOK, response.StatusCode)
+
+}
+
+func TestGetEventFailure(t *testing.T) {
+	var data = []byte(`{}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("GET", "/getevents", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("Wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusNotFound, response.StatusCode)
+
+}
 func TestLoginWhenInCorrectPasswordIsGiven(t *testing.T) {
 	var data = []byte(`{
-		"email": "tejd@gmail.com",
-		"password": "12"
+		"email": "tejdeepb@gmail.com",
+		"password": "passwor"
 	}`)
 
 	app := fiber.New()
@@ -166,11 +127,12 @@ func TestLoginWhenInCorrectPasswordIsGiven(t *testing.T) {
 	}
 
 	assert.Equal(t, fiber.StatusNotFound, response.StatusCode)
+
 }
 
-func TestLoginWhenCorrectPassWordISGiven(t *testing.T) {
+func TestLoginWhenCorrectPassWordIsGiven(t *testing.T) {
 	var data = []byte(`{
-		"email": "tejd@gmail.com",
+		"email": "tejdeepb@gmail.com",
 		"password": "password"
 	}`)
 
@@ -185,13 +147,14 @@ func TestLoginWhenCorrectPassWordISGiven(t *testing.T) {
 	}
 
 	assert.Equal(t, fiber.StatusOK, response.StatusCode)
+
 }
 
 func TestRegisterSuccessfulRegistration(t *testing.T) {
 	var data = []byte(`{
 		"name" : "tejdeep"
-		"email": "tejd@gmail.com",
-		"password": "password"
+		"email": "tejdeepnew@gmail.com",
+		"password": "passwordn"
 	}`)
 
 	app := fiber.New()
@@ -205,14 +168,11 @@ func TestRegisterSuccessfulRegistration(t *testing.T) {
 	}
 
 	assert.Equal(t, fiber.StatusOK, response.StatusCode)
+
 }
 
 func TestRegisterRegistrationFail(t *testing.T) {
-	var data = []byte(`{
-		"name" : "Tejdeep"
-		"email": "tejd@gmail.com",
-		"password": "password"
-	}`)
+	var data = []byte(`{}`)
 
 	app := fiber.New()
 
@@ -225,6 +185,7 @@ func TestRegisterRegistrationFail(t *testing.T) {
 	}
 
 	assert.Equal(t, fiber.StatusInternalServerError, response.StatusCode)
+
 }
 
 func TestLogoutFailurelogout(t *testing.T) {
@@ -240,7 +201,8 @@ func TestLogoutFailurelogout(t *testing.T) {
 		t.Errorf("Wrong status code")
 	}
 
-	assert.Equal(t, fiber.StatusInternalServerError, response.StatusCode)
+	assert.Equal(t, fiber.StatusNotFound, response.StatusCode)
+
 }
 
 func TestLogoutSuccessfulLogout(t *testing.T) {
@@ -257,4 +219,143 @@ func TestLogoutSuccessfulLogout(t *testing.T) {
 	}
 
 	assert.Equal(t, fiber.StatusOK, response.StatusCode)
+
+}
+
+func TestLikeFailure(t *testing.T) {
+	var data = []byte(`{}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("POST", "/Like", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("Wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusNotFound, response.StatusCode)
+
+}
+
+func TestLikeSuccess(t *testing.T) {
+	var data = []byte(`{
+		"userId" : 300,
+		"eventId": 1,
+		"liked": true
+	}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("POST", "/like", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusOK, response.StatusCode)
+
+}
+
+func TestGeteventbyidSuccess(t *testing.T) {
+	var data = []byte(`{}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("GET", "/getevent/1", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusOK, response.StatusCode)
+
+}
+
+func TestGeteventbyidFailure(t *testing.T) {
+	var data = []byte(`{}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("GET", "/getevent/", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusNotFound, response.StatusCode)
+
+}
+
+func TestUpdateeventbyidSuccess(t *testing.T) {
+	var data = []byte(`{}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("PUT", "/updatevent/300", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusOK, response.StatusCode)
+
+}
+
+func TestUpdateeventbyidFailure(t *testing.T) {
+	var data = []byte(`{}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("PUT", "/updatevent/", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusNotFound, response.StatusCode)
+
+}
+
+func TestDeleteeventbyidSuccess(t *testing.T) {
+	var data = []byte(`{}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("DELETE", "/deleteevent/300", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusOK, response.StatusCode)
+}
+
+func TestDeleteeventbyidFailure(t *testing.T) {
+	var data = []byte(`{}`)
+
+	app := fiber.New()
+
+	req, _ := http.NewRequest("DELETE", "/deleteevent/", bytes.NewBuffer(data))
+
+	response, err := app.Test(req)
+
+	if err != nil {
+		t.Errorf("wrong status code")
+	}
+
+	assert.Equal(t, fiber.StatusNotFound, response.StatusCode)
 }
