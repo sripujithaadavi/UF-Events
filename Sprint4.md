@@ -680,6 +680,14 @@ https://localhost:3000/deleteevent/246
 
 
 
+## Link to Backend Project Board
+[UF-Events Repo Link](https://github.com/sripujithaadavi/UF-Events)
+
+[Backend Project Board](https://github.com/sripujithaadavi/UF-Events/projects/3)
+
+[Hyperlink to User Stories](https://github.com/sripujithaadavi/UF-Events/issues?q=is%3Aissue+is%3Aclosed)
+
+[Hyperlink to Pull Request](https://github.com/sripujithaadavi/UF-Events/pulls?q=is%3Apr+is%3Aclosed)
 
 
 ## Backend Sprint 4 Deliverables
