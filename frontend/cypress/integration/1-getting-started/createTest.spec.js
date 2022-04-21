@@ -314,6 +314,29 @@ describe('test signup function', () => {
     cy.wait(2000)
     cy.get('.mat-warn > .mat-button-wrapper').click()
 
+    // cypress test cases to check the event filter using priceStart
+    cy.get('#mat-input-40').clear().type('8')
+    cy.get('.mat-accent > .mat-button-wrapper').click()
+    cy.wait(2000)
+    cy.get('.mat-warn > .mat-button-wrapper').click()
+
+// cypress test cases to check the event filter using priceEnd
+    cy.get('#mat-input-41').clear().type('6')
+    cy.get('.mat-accent > .mat-button-wrapper').click()
+    cy.wait(2000)
+    cy.get('.mat-warn > .mat-button-wrapper').click()
+
+// cypress test cases to check the event filter using SortBy
+    cy.get('#mat-input-42').type('In-person')
+    cy.get('.mat-accent > .mat-button-wrapper').click()
+    cy.wait(2000)
+    cy.get('.mat-warn > .mat-button-wrapper').click()
+
+// cypress test cases to check the event filter using category
+    cy.get('#mat-select-value-5').click()
+    cy.get('#mat-option-5 > .mat-option-text').click()
+    cy.get('.mat-accent > .mat-button-wrapper').click()
+
 // cypress testcases to logout from the account
     cy.get('.mat-menu-trigger').click()
     cy.get('.mat-menu-content > :nth-child(3)').click()
