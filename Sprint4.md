@@ -28,7 +28,7 @@ Tejdeep Bandreddy - 7206 9922
 
 
 ### Cypress test Video 
-
+https://user-images.githubusercontent.com/97573204/164366531-c10c9975-47cf-481e-8bd6-a28b3691fb79.mp4
 
 ### Frontend Link to Project Board
 [UF-Events Repo Link](https://github.com/sripujithaadavi/UF-Events)
