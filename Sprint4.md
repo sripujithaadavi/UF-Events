@@ -160,16 +160,539 @@ should give details of the event like Event Name, Event Info, Description, Sampl
 
 ![CypressTestCases](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/CypressTestCases.jpg)
 
-# Backend
+## Backend
 
-### Unit testcase Video
+## How to start the backend server
+Step 1. Go to the backend directory
+
+Step 2. Run the below Command
+```http
+$go run home.go
+```
+
+### Unit testing demo
 
 
-### API Documentation
+https://user-images.githubusercontent.com/97720109/164558870-568181b9-f383-44b9-b168-e04917c879ec.mp4
 
 
-### Backend Deliverables
+
+## Backend API Documentation
 
 
-### Backend Output
+
+## 1.	To post an event
+
+
+**Endpoint:**
+
+```http
+  /postevent
+```
+
+**Request Method:**
+POST
+
+**Target URL:**
+
+https://localhost:3000/postevent/
+
+**Request Body:**
+```http
+{
+    "header": "Play the fest",
+    "secheader": "Come play with us",
+    "desc": "Playstation and PC Games",
+    "sampledesc": "Exciting Prizes",
+    "postedby": "user1",
+    "postedon": "1/12/2022, 2:40:10 PM",
+    "price": 10000,
+    "category": "gaming",
+    "address": "ReitzUnion, 2nd floor 217",
+    "imageUrl": "string",
+    "eventon": "1/12/2022, 1:30:08 PM",
+    "upvoted": true
+}
+```
+
+**Response Body:**
+```http
+{
+    "ID": 248,
+    "CreatedAt": "2022-04-21T01:31:36.1501906-04:00",
+    "UpdatedAt": "2022-04-21T01:31:36.1501906-04:00",
+    "DeletedAt": null,
+    "eventid": 0,
+    "header": "Play the fest",
+    "secheader": "Come play with us",
+    "desc": "Playstation and PC Games",
+    "sampledesc": "Exciting Prizes",
+    "postedby": "user1",
+    "postedon": "1/12/2022, 2:40:10 PM",
+    "price": 10000,
+    "category": "gaming",
+    "address": "ReitzUnion, 2nd floor 217",
+    "imageurl": "",
+    "eventon": "1/12/2022, 1:30:08 PM",
+    "upvoted": true,
+    "likes": 0,
+    "LikesList": null
+}
+```
+
+**Possible Response codes**: 200,400
+
+**Examples**: 200 OK and 400 Bad Request.
+
+**Output Screenshot-**
+
+
+![1.postevent](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/1.postevent.png)
+
+
+## 2.	To Get Events
+
+
+
+**Endpoint:**
+```http
+/getevents
+```
+**Request Method:**
+GET
+
+**Target URL:**
+https://localhost:3000/getevents/
+
+
+
+## Response Body
+```http
+[
+    {
+        "ID": 244,
+        "CreatedAt": "2022-04-20T23:34:49.086748-04:00",
+        "UpdatedAt": "2022-04-20T23:34:49.086748-04:00",
+        "DeletedAt": null,
+        "eventid": 0,
+        "header": "Mass on the Grass",
+        "secheader": "Weekly",
+        "desc": "Celebrate Mass on Ash Wednesday in Campus",
+        "sampledesc": "Celebrate Mass on Ash Wednesday in Campus",
+        "postedby": "",
+        "postedon": "",
+        "price": 4,
+        "category": "In-person",
+        "address": "Plaza of the Americas",
+        "imageurl": "",
+        "eventon": "2022-05-03T15:00",
+        "upvoted": false,
+        "likes": 0,
+        "LikesList": null
+    },
+    {
+        "ID": 245,
+        "CreatedAt": "2022-04-20T23:34:57.035791-04:00",
+        "UpdatedAt": "2022-04-20T23:34:57.035791-04:00",
+        "DeletedAt": null,
+        "eventid": 0,
+        "header": "Shaving Cream Showdown",
+        "secheader": "Yearly",
+        "desc": "The purpose of this event is to build housing community",
+        "sampledesc": "The purpose of this event is to build housing community",
+        "postedby": "",
+        "postedon": "",
+        "price": 10,
+        "category": "In-person",
+        "address": "Weaver Hall",
+        "imageurl": "",
+        "eventon": "2022-10-03T16:00",
+        "upvoted": false,
+        "likes": 0,
+        "LikesList": null
+    }
+]
+```
+
+**Possible Response codes**: 200,400
+
+**Examples**: 200 OK and 400 Bad Request.
+
+**Output Screenshot-**
+
+![2.GetEvents](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/2.GetEvents.png)
+
+
+## 3.	Signup
+
+
+**Endpoint:**
+```http
+/signup
+```
+**Request Method:**
+POST
+
+**Target URL:**
+https://localhost:3000/signup/
+
+## Request Body
+```http
+{
+    "name":"Tejdeepb",
+    "email":"tejdeepb@gmail.com",
+    "password":"password"
+}
+```
+## Response Body
+```http
+{
+    "ID": 160,
+    "CreatedAt": "2022-04-21T02:46:12.8670622-04:00",
+    "UpdatedAt": "2022-04-21T02:46:12.8670622-04:00",
+    "DeletedAt": null,
+    "userId": 0,
+    "Name": "Tejdeepb",
+    "Email": "tejdeepb@gmail.com"
+}
+```
+
+**Possible Response codes**: 200, 500
+
+**Examples**: 200 OK and 500 Internal Server Error.
+
+**Output Screenshot-**
+
+![3.Signup](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/3.Signup.png)
+
+
+## 4.	Login
+
+
+
+**Endpoint:**
+```http
+/login
+```
+**Request Method:**
+Post
+
+**Target URL:**
+https://localhost:3000/login/
+
+## Request Body
+```http
+{
+    "email":"tejdeepb@gmail.com",
+    "password":"password"
+}
+```
+## Response Body
+**Positive Scenario-**
+```http
+{
+    "message": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwIn0.VaulONRD13RfmXfESP9Eo65rDyrIPZvRj58NjHiYwcc",
+    "user": {
+        "ID": 160,
+        "CreatedAt": "2022-04-21T02:46:12.867062-04:00",
+        "UpdatedAt": "2022-04-21T02:46:12.867062-04:00",
+        "DeletedAt": null,
+        "userId": 0,
+        "Name": "Tejdeepb",
+        "Email": "tejdeepb@gmail.com"
+    }
+}
+```
+**Negative Scenario-**
+```http
+{
+    "message": "user not found"
+}
+```
+
+```http
+{
+    "message": "incorrect password"
+}
+```
+**Possible Response codes**: 200,404,400
+
+**Examples**: 200 OK, 404 Not Found, 400 Bad Request.
+
+**Output Screenshots-**
+
+![4.login](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/4.login.png)
+
+
+
+![4.login 2](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/4.login%202.png)
+
+
+
+![4.login 3](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/4.login%203.png)
+
+
+## 5.	Logout
+**Endpoint:**
+```http
+/logout
+```
+**Request Method:**
+POST
+
+**Target URL:**
+https://localhost:3000/logout/
+
+## Response Body
+```http
+{
+    "message": "success"
+}
+```
+
+**Possible Response codes**: 200, 400
+
+**Examples**: 200 OK, 400 Bad Request
+
+**Output Screenshot-**
+
+![5.logout](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/5.logout.png)
+
+## 6.	To Like an event
+**Endpoint:**
+
+```http
+  /like
+```
+
+**Request Method:**
+Post
+
+**Target URL:**
+
+https://localhost:3000/like/
+
+**Request Body:**
+```http
+{
+    "userId":300,
+    "eventID":55,
+    "liked":true
+}
+```
+**Response Bodies in different scenarios:**
+```http
+"likes updated"
+
+```
+```http
+"You already liked this event"
+```
+```http
+"You cannot unlike this event"
+```
+```http
+"unable to edit likes"
+
+```
+**Possible Response codes**: 200,400
+
+**Examples**: 200 OK and 400 Bad Request.
+
+**Output Screenshot-**
+
+![6.like](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/6.like.png)
+
+
+## 7.	To get an event by id
+**Endpoint:**
+
+```http
+  /getevent/:id
+```
+
+**Request Method:**
+Get
+
+**Target URL:**
+
+https://localhost:3000/getevent/245
+
+**Positive Scenario-**
+```http
+{
+        "ID": 245,
+        "CreatedAt": "2022-04-20T23:34:57.035791-04:00",
+        "UpdatedAt": "2022-04-20T23:34:57.035791-04:00",
+        "DeletedAt": null,
+        "eventid": 0,
+        "header": "Shaving Cream Showdown",
+        "secheader": "Yearly",
+        "desc": "The purpose of this event is to build housing community",
+        "sampledesc": "The purpose of this event is to build housing community",
+        "postedby": "",
+        "postedon": "",
+        "price": 10,
+        "category": "In-person",
+        "address": "Weaver Hall",
+        "imageurl": "",
+        "eventon": "2022-10-03T16:00",
+        "upvoted": false,
+        "likes": 0,
+        "LikesList": null
+    }
+```
+**Negative Scenario-**
+```http
+    "error"
+```
+**Possible Response codes**: 200,400
+
+**Examples**: 200 OK and 400 Bad Request.
+
+**Output Screenshots-**
+
+![7.getEventbyId](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/7.getEventbyId.png)
+
+
+
+![7.getEventbyId 2](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/7.getEventbyId%202.png)
+
+
+
+## 8.	To update an event by id
+**Endpoint:**
+
+```http
+  /updatevent/:id
+```
+
+**Request Method:**
+Put
+
+**Target URL:**
+
+https://localhost:3000/updateevent/300
+
+**Request Body:**
+```http
+    {
+        "eventid": 55,
+        "header": "Mass on the Grass",
+        "secheader": "Weekly",
+        "desc": "Celebrate Mass on Ash Wednesday in Campus",
+        "sampledesc": "Celebrate Mass on Ash Wednesday in Campus",
+        "postedby": "",
+        "postedon": "",
+        "price": 4,
+        "category": "In-person",
+        "address": "Plaza of the Americas",
+        "imageurl": "",
+        "eventon": "2022-05-03T15:00",
+        "upvoted": false,
+        "likes": 0,
+        "LikesList": null
+    }
+```
+**Response Body:**
+
+**Positive Scenario-**
+```http
+{
+    "ID": 300,
+    "CreatedAt": "2022-04-20T23:34:49.086748-04:00",
+    "UpdatedAt": "2022-04-21T14:24:48.9669553-04:00",
+    "DeletedAt": null,
+    "eventid": 55,
+    "header": "Mass on the Grass",
+    "secheader": "Weekly",
+    "desc": "Celebrate Mass on Ash Wednesday in Campus",
+    "sampledesc": "Celebrate Mass on Ash Wednesday in Campus",
+    "postedby": "",
+    "postedon": "",
+    "price": 4,
+    "category": "In-person",
+    "address": "Plaza of the Americas",
+    "imageurl": "",
+    "eventon": "2022-05-03T15:00",
+    "upvoted": false,
+    "likes": 0,
+    "LikesList": null
+}
+```
+**Negative Scenario-**
+
+```http
+    "no such event exists"
+```
+**Possible Response codes**: 200,400
+
+**Examples**: 200 OK and 400 Bad Request.
+
+**Output Screenshots-**
+
+![8.Updateevent](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/8.Updateevent.png)
+
+
+
+![8.Updateevent 2](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/8.Updateevent%202.png)
+
+
+
+
+## 9.	To delete an event by id
+**Endpoint:**
+
+```http
+  /deleteevent/:id
+```
+
+**Request Method:**
+Delete
+
+**Target URL:**
+
+https://localhost:3000/deleteevent/246
+
+**Response Body:**
+
+**Postive Scenario-** 
+```http
+        "event deleted"
+```
+**Negative Scenario-**
+```http
+        "no such event exists"
+```
+
+**Possible Response codes**: 200,400
+
+**Examples**: 200 OK and 400 Bad Request.
+
+**Output Screenshots-**
+
+![9.Delete](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/9.Delete.png)
+
+
+
+![9.Delete 2](https://github.com/sripujithaadavi/UF-Events/blob/main/Sprint4%20Output/9.Delete%202.png)
+
+
+
+
+
+## Backend Sprint 4 Deliverables
+
+* Implemented retrieve event for specific user functionality.
+* Implemented retrieve events with user liked or not functionality.
+* Implemented retrieve endpoint to update event by user id functionality.
+* Implemented delete event functionality
+* Implemented update event functionality
+* Refactored code and fixed bugs for ‘like’ end point.
+* Refactored code and fixed bugs for dislike functionality
+* Tested all the API calls
+* Unit tested all the functionalities.
+
+
 
